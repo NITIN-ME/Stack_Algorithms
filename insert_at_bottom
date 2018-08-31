@@ -1,0 +1,35 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+
+void insertAtBottom(stack<int>& s, int num){
+    if(s.size() == 0){
+        s.push(num);
+    }
+    else{
+        int a = s.top();
+        s.pop();
+        insertAtBottom(s, num);
+        s.push(a);
+    }
+}
+
+void showStack(stack<int>& s){
+    while(!s.empty()){
+        cout<<s.top()<<"  ";
+        s.pop();
+    }
+    cout<<endl;
+}
+
+int main(){
+    stack<int> s;
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    s.push(4);
+    s.push(5);
+    insertAtBottom(s, 99);
+    showStack(s);
+    return 0;
+}
