@@ -1,0 +1,58 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+
+
+void InsertAtBottom(stack<int>& s,int x){
+    if(s.size() == 0){
+        s.push(x);
+    }
+    else{
+        int num = s.top();
+        s.pop();
+        InsertAtBottom(s, x);
+        s.push(num);
+    }
+}
+
+void showStack(stack<int>& s){
+    while(!s.empty()){
+        cout<<s.top()<<"  ";
+        s.pop();
+    }
+    cout<<endl;
+}
+
+void sortedInsert(stack<int>& s, int num){
+    if(s.size() == 0 || num > s.top()){
+        s.push(num);
+    }
+    else{
+        int temp = s.top();
+        s.pop();
+        sortedInsert(s, num);
+        s.push(temp);
+    }
+}
+
+void sortStack(stack<int>& s){
+    if(!s.empty()){
+        int num = s.top();
+        s.pop();
+        sortStack(s);
+        sortedInsert(s, num);
+    }
+}
+
+int main(){
+    stack<int> s;
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    s.push(4);
+    s.push(5);
+    InsertAtBottom(s, 99);
+    sortStack(s);
+    showStack(s);
+    return 0;
+}
